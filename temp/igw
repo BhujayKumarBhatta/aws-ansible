@@ -1,0 +1,10 @@
+TASK [create-vpc : debug] ************************************************************************************************************************************
+ok: [localhost] => {
+    "created_igw": {
+        "changed": true,
+        "failed": false,
+        "gateway_id": "igw-087ab9ba7959b73e4",
+        "tags": {},
+        "vpc_id": "vpc-00f4aa2af2effd2d8"
+    }
+}

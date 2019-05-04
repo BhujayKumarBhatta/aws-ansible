@@ -1,0 +1,12 @@
+vpc_name: division1_vpc
+vpc_cidr: 10.10.0.0/16
+vpc_internet_gateway: "present"
+vpc_subnets: 
+  - name: db_subnet
+    cidr: 10.10.1.0/24
+    route_to_internet_gateway: False
+    assign_pub_ip_to_instance: False
+  - name: app_subnet
+    cidr: 10.10.2.0/24
+    route_to_internet_gateway: True
+    assign_pub_ip_to_instance: True

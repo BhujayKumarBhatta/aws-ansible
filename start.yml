@@ -3,7 +3,8 @@
   connection: local
   gather_facts: False  
   vars_files:
-     - aws_auth.yml   
+     - aws_auth.yml 
+     -  inventory/division1.yml
     
   roles:
     - create-vpc
