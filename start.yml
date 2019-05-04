@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False  
+  vars_files:
+     - aws_auth.yml   
+    
+  roles:
+    - create-vpc
+   

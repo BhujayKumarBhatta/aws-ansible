@@ -1,0 +1,5 @@
+venv
+aws_auth.yml
+secrets
+envset.sh
+
