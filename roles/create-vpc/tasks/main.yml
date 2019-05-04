@@ -75,9 +75,28 @@
         gateway_id: "{{ created_igw.gateway_id }}"
   when: item.item.route_to_internet_gateway == True
   with_items: "{{ created_subnet.results }}"
-  register: public_route_table
+  register: created_route_table
 
-  
+# - debug: 
+#     var: created_route_table
+    
+    
+- name: create security  group
+  ec2_group:
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"
+    region: "{{ vpc_region }}"  
+    vpc_id: "{{ created_vcp.vpc.id }}"  
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"
+    region: "{{ vpc_region }}"  
+    vpc_id: "{{ created_vcp.vpc.id }}" 
+    rules: "{{ item.rules }}"  
+    rules_egress: "{{ item.rules_egress }}"
+  with_items: "{{ vpc_security_groups }}"
+      
     
 
     

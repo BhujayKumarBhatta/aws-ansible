@@ -10,3 +10,34 @@ vpc_subnets:
     cidr: 10.10.2.0/24
     route_to_internet_gateway: True
     assign_pub_ip_to_instance: True
+
+vpc_security_groups:
+  - name: sg1
+    description: sg description
+    rules:
+      - proto: tcp
+        ports: 22        
+      - proto: tcp
+        ports:
+          - 80
+          - 443
+          - 8080-8082
+        cidr_ip: 0.0.0.0/0        
+    rules_egress:
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+        cidr_ipv6: 64:ff9b::/96
+      - proto: tcp
+        ports: 22
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+#         cidr_ipv6: 64:ff9b::/96  
+#         group_name: example-other
+#         description to use if example-other needs to be created
+#         group_desc: other example EC2 group
+  
+    
