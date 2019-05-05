@@ -1,0 +1,11 @@
+---
+- name: create key pair from a public key file 
+  ec2_key:
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"
+    region: "{{ vpc_region }}"  
+    name: "{{ item.key_pair_name }}"
+    key_material: "{{ lookup('file', item.public_key_filename) }}"
+  with_items: "{{ key_pairs }}"
+  tags:
+    - keypair

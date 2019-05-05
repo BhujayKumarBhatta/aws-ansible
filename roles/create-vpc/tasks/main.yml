@@ -88,13 +88,10 @@
     region: "{{ vpc_region }}"  
     vpc_id: "{{ created_vcp.vpc.id }}"  
     name: "{{ item.name }}"
-    description: "{{ item.description }}"
-    aws_access_key: "{{ec2_access_key}}"
-    aws_secret_key: "{{ec2_secret_key}}"
-    region: "{{ vpc_region }}"  
-    vpc_id: "{{ created_vcp.vpc.id }}" 
+    description: "{{ item.description }}"    
     rules: "{{ item.rules }}"  
     rules_egress: "{{ item.rules_egress }}"
+    purge_rules: 
   with_items: "{{ vpc_security_groups }}"
       
     

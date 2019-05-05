@@ -35,9 +35,28 @@ vpc_security_groups:
         from_port: 22
         to_port: 22
         cidr_ip: 0.0.0.0/0
-#         cidr_ipv6: 64:ff9b::/96  
-#         group_name: example-other
-#         description to use if example-other needs to be created
-#         group_desc: other example EC2 group
+ 
+key_pairs:      
+  - key_pair_name: k1
+    public_key_filename: /home/bhujay/.ssh/id_rsa.pub
+
+list_of_computes:
+  - name: c1
+    instance_type: t2.micro
+    image: ami-0c55b159cbfafe1f0
+    key_name: k1
+    security_groups: 
+      - sg1
+    monitoring: no
+    tenancy: default
+    assign_public_ip: yes
+    instance_tags:
+        app: app1
+    count: 1
+    vpc_subnet_name: app_subnet
+    
+    
+    
+    
   
     

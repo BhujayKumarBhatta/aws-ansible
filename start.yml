@@ -8,4 +8,6 @@
     
   roles:
     - create-vpc
+    - create-keypair
+    - create-ec2
    

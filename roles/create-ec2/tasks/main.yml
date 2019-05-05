@@ -1,0 +1,75 @@
+---
+- name: Gather facts about any VPC subnet with a tag key Name and value Example
+  ec2_vpc_subnet_facts:
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"
+    region: "{{ vpc_region }}" 
+#     filters:
+#       "tag:Name": "{{ item.vpc_subnet_name }}"
+#   with_items: "{{ list_of_computes }}"
+  register: subnnet_facts
+  tags:
+    - ec2
+    
+# - set_fact: 
+#     myfact: "{{ subnnet_facts.results| items2dict }}"
+#     tags:
+#     - ec2
+# 
+# - debug:
+#     msg: "{{ subnnet_facts }}"
+#   tags:
+#     - ec2
+ 
+    
+- debug:
+    msg: "{{subnnet_facts | json_query('subnets') }}"
+  tags:
+    - ec2
+    
+- debug:
+    msg: "{{subnnet_facts | json_query('subnets[?tags.Name==`app_subnet`].id') }}"
+  tags:
+    - ec2
+    
+- debug:  
+    msg: "{{subnnet_facts | json_query(qry) }}"
+  vars:
+     qry: "subnets[?tags.Name=='{{item.vpc_subnet_name}}'].id"
+  with_items: "{{ list_of_computes }}"  
+  tags:
+    - ec2
+
+# - name: Launch instance
+#   ec2:
+#      aws_access_key: "{{ec2_access_key}}"
+#      aws_secret_key: "{{ec2_secret_key}}"
+#      region: "{{ vpc_region }}" 
+#      instance_type: "{{ item.0.instance_type }}"
+#      image: "{{ item.0.image }}"
+#      key_name: "{{item.0.key_name }}"
+#      group: "{{ item.0.security_groups }}"
+#      vpc_subnet_id: "{{ item.1.subnet.id}}"
+#      assign_public_ip: "{{ item.0.assign_public_ip }}"
+#      monitoring: "{{ item.0.monitoring }}"    
+#      tenancy: "{{ item.0.tenancy }}"
+#      instance_tags: "{{ item.0.instance_tags }}"
+#      count: "{{ item.0.count }}"
+#      wait: true
+#      wait_timeout: 500
+#   when: item.1.item.name == item.0.vpc_subnet_name
+#   with_together: 
+#     - "{{ list_of_computes }}"
+#     - "{{ created_subnet.results }}"
+#   register: ec2_list
+
+# 
+# - debug: 
+#     msg: "{{ item.0.vpc_subnet_name }} and {{ item.1.item.name }} "
+#   with_together: 
+#     - "{{ list_of_computes }}"
+#     - "{{ created_subnet.results }}"
+#   ignore_errors: yes
+
+ #{% if i.subnet.tags.Name == item.vpc_subnet_name %}
+ #{% endif %}
