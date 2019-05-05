@@ -14,11 +14,10 @@ vpc_subnets:
 vpc_security_groups:
   - name: sg1
     description: sg description
-    rules:
-      - proto: tcp
-        ports: 22        
+    rules:         
       - proto: tcp
         ports:
+          - 22
           - 80
           - 443
           - 8080-8082
@@ -43,17 +42,20 @@ key_pairs:
 list_of_computes:
   - name: c1
     instance_type: t2.micro
-    image: ami-0c55b159cbfafe1f0
+    image_id: ami-1c200c73
     key_name: k1
     security_groups: 
       - sg1
     monitoring: no
     tenancy: default
     assign_public_ip: yes
-    instance_tags:
+    instance_tags:        
         app: app1
     count: 1
     vpc_subnet_name: app_subnet
+    region: "ap-south-1"
+    state: present
+    
     
     
     
