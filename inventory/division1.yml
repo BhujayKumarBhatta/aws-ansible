@@ -1,43 +1,59 @@
 vpc_name: division1_vpc
+vpc_state: present
 vpc_cidr: 10.10.0.0/16
-vpc_internet_gateway: "present"
+vpc_internet_gateway: present
 vpc_subnets: 
   - name: db_subnet
     cidr: 10.10.1.0/24
     route_to_internet_gateway: False
     assign_pub_ip_to_instance: False
+    state: present
   - name: app_subnet
     cidr: 10.10.2.0/24
     route_to_internet_gateway: True
+    route_table_name: public
     assign_pub_ip_to_instance: True
-
+    state: present
+    
 vpc_security_groups:
   - name: sg1
-    description: sg description
+    description: Rule for app server
+    state: present
     rules:         
       - proto: tcp
         ports:
           - 22
           - 80
-          - 443
-          - 8080-8082
-        cidr_ip: 0.0.0.0/0        
+          - 443          
+        cidr_ip: 0.0.0.0/0              
     rules_egress:
       - proto: tcp
         from_port: 80
         to_port: 80
         cidr_ip: 0.0.0.0/0
-        cidr_ipv6: 64:ff9b::/96
-      - proto: tcp
-        ports: 22
+        cidr_ipv6: 64:ff9b::/96      
       - proto: tcp
         from_port: 22
         to_port: 22
         cidr_ip: 0.0.0.0/0
+  - name: sg2
+    description: Rule for database
+    state: present
+    rules:         
+      - proto: tcp
+        ports:
+          - 22
+          - 3306                    
+        cidr_ip: 0.0.0.0/0              
+    rules_egress:
+       - proto: tcp
+         from_port:
+           - 22
  
 key_pairs:      
   - key_pair_name: k1
     public_key_filename: /home/bhujay/.ssh/id_rsa.pub
+    state: present
 
 list_of_computes:
   - name: c1
@@ -53,6 +69,21 @@ list_of_computes:
         app: app1
     count: 1
     vpc_subnet_name: app_subnet
+    region: "ap-south-1"
+    state: present
+  - name: c2
+    instance_type: t2.micro
+    image_id: ami-1c200c73
+    key_name: k1
+    security_groups: 
+      - sg2
+    monitoring: no
+    tenancy: default
+    assign_public_ip: no
+    instance_tags:        
+        db: db1
+    count: 1
+    vpc_subnet_name: db_subnet
     region: "ap-south-1"
     state: present
     

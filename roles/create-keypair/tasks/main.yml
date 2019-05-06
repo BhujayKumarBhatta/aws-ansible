@@ -6,6 +6,7 @@
     region: "{{ vpc_region }}"  
     name: "{{ item.key_pair_name }}"
     key_material: "{{ lookup('file', item.public_key_filename) }}"
+    state: "{{ item.state }}"
   with_items: "{{ key_pairs }}"
   tags:
     - keypair

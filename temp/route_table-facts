@@ -1,0 +1,96 @@
+route_table_facts.route_tables[0].tags.Name
+route_table_facts.route_tables[0].vpc_id
+
+ok: [localhost] => {
+    "route_table_facts": {
+        "changed": false,
+        "failed": false,
+        "route_tables": [
+            {
+                "associations": [
+                    {
+                        "id": "rtbassoc-1f0e4b74",
+                        "main": true,
+                        "route_table_id": "rtb-fbb54090",
+                        "subnet_id": null
+                    }
+                ],
+                "id": "rtb-fbb54090",
+                "routes": [
+                    {
+                        "destination_cidr_block": "172.31.0.0/16",
+                        "gateway_id": "local",
+                        "instance_id": null,
+                        "interface_id": null,
+                        "origin": "CreateRouteTable",
+                        "state": "active",
+                        "vpc_peering_connection_id": null
+                    },
+                    {
+                        "destination_cidr_block": "0.0.0.0/0",
+                        "gateway_id": "igw-4a9e5f22",
+                        "instance_id": null,
+                        "interface_id": null,
+                        "origin": "CreateRoute",
+                        "state": "active",
+                        "vpc_peering_connection_id": null
+                    }
+                ],
+                "tags": {},
+                "vpc_id": "vpc-ebcefa83"
+            },
+            {
+                "associations": [
+                    {
+                        "id": "rtbassoc-06837c9f9b9ccb81a",
+                        "main": true,
+                        "route_table_id": "rtb-005d9c427c2eab6bd",
+                        "subnet_id": null
+                    }
+                ],
+                "id": "rtb-005d9c427c2eab6bd",
+                "routes": [
+                    {
+                        "destination_cidr_block": "10.10.0.0/16",
+                        "gateway_id": "local",
+                        "instance_id": null,
+                        "interface_id": null,
+                        "origin": "CreateRouteTable",
+                        "state": "active",
+                        "vpc_peering_connection_id": null
+                    }
+                ],
+                "tags": {},
+                "vpc_id": "vpc-00f4aa2af2effd2d8"
+            },
+            {
+                "associations": [],
+                "id": "rtb-00bd26bd1620d4e79",
+                "routes": [
+                    {
+                        "destination_cidr_block": "10.10.0.0/16",
+                        "gateway_id": "local",
+                        "instance_id": null,
+                        "interface_id": null,
+                        "origin": "CreateRouteTable",
+                        "state": "active",
+                        "vpc_peering_connection_id": null
+                    },
+                    {
+                        "destination_cidr_block": "0.0.0.0/0",
+                        "gateway_id": "igw-087ab9ba7959b73e4",
+                        "instance_id": null,
+                        "interface_id": null,
+                        "origin": "CreateRoute",
+                        "state": "blackhole",
+                        "vpc_peering_connection_id": null
+                    }
+                ],
+                "tags": {
+                    "Name": "Public"
+                },
+                "vpc_id": "vpc-00f4aa2af2effd2d8"
+            }
+        ]
+    }
+}
