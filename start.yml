@@ -10,4 +10,5 @@
     - create-vpc
     - create-keypair
     - create-ec2
+    - aws-elb
    

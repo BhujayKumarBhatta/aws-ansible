@@ -1,0 +1,19 @@
+# Tags to set on the VPC
+vpc_resource_tags: {
+  "Name":"{{ vpc_name }}"
+  }
+
+# If you want the VPC to be able to directly connect to the Internet
+vpc_internet_gateway: true
+
+# Default component states
+vpc_state: "present"
+
+
+vpc_region: "ap-south-1"
+    
+vpc_tenancy: "default"
+vpc_dns_support : yes
+vpc_dns_hostnames: no
+
+purge_existing_routes_from_subnet: True

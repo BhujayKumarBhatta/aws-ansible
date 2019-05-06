@@ -11,23 +11,23 @@
   tags:
     - ec2
         
-- debug:
-    msg: "{{subnnet_facts | json_query('subnets') }}"
-  tags:
-    - ec2
-    
-- debug:
-    msg: "{{subnnet_facts | json_query('subnets[?tags.Name==`app_subnet`].id') }}"
-  tags:
-    - ec2
-    
-- debug:  
-    msg: "{{subnnet_facts | json_query(qry) | join(', ') }}"
-  vars:
-     qry: "subnets[?tags.Name=='{{item.vpc_subnet_name}}'].id"
-  with_items: "{{ list_of_computes }}"  
-  tags:
-    - ec2
+# - debug:
+#     msg: "{{subnnet_facts | json_query('subnets') }}"
+#   tags:
+#     - ec2
+#     
+# - debug:
+#     msg: "{{subnnet_facts | json_query('subnets[?tags.Name==`app_subnet`].id') }}"
+#   tags:
+#     - ec2
+#     
+# - debug:  
+#     msg: "{{subnnet_facts | json_query(qry) | join(', ') }}"
+#   vars:
+#      qry: "subnets[?tags.Name=='{{item.vpc_subnet_name}}'].id"
+#   with_items: "{{ list_of_computes }}"  
+#   tags:
+#     - ec2
 
 # - name: Launch instance
 #   ec2:
