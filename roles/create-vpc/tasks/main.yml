@@ -50,6 +50,7 @@
     region: "{{ vpc_region }}"  
     state: "{{ item.state }}"
     vpc_id: "{{ created_vcp.vpc.id }}"
+    az: "{{ item.availability_zone }}"
     cidr: "{{ item.cidr }}"
     map_public : "{{ item.assign_pub_ip_to_instance }}"
     resource_tags:

@@ -68,6 +68,7 @@
      key_name: "{{item.key_name }}"
      security_groups: "{{ item.security_groups }}"
      vpc_subnet_id: "{{subnnet_facts | json_query(qry) | join(', ')}}"
+     #availability_zone: "{{ item.availability_zone }}"
      network:
        assign_public_ip: "{{ item.assign_public_ip }}"
      detailed_monitoring : "{{ item.monitoring }}"    
